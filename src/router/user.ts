@@ -19,15 +19,15 @@ import { TOTAL_DECIMALS } from "../config";
 
 
 const connection = new Connection("https://solana-devnet.g.alchemy.com/v2/ng1PoFOLtUyom4GCpXE1FUgYAp2l0NsA");
-const PARENT_WALLET_ADDRESS = "6DKwMKNkFJ3XZ2S15b4BP5wk2bu4D4dMhuTi5Ke11XrG";
+const PARENT_WALLET_ADDRESS = process.env.PARENT_WALLET_ADDRESS;
 const DEFAULT_TITLE = "Select the most clickable thumbnail";
 
 const s3Client = new S3Client({
   credentials: {
-    accessKeyId: "AKIAZOXTIWLZKYIQRIEH",
-    secretAccessKey: "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",
+    accessKeyId: process.env.AccessKeyId,
+    secretAccessKey: process.env.SecretAccessKey,
   },
-  region: "eu-north-1",
+  region: process.env.Region,
 });
 
 
