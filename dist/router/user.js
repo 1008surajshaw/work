@@ -24,22 +24,15 @@ const web3_js_1 = require("@solana/web3.js");
 const tweetnacl_1 = __importDefault(require("tweetnacl"));
 const config_1 = require("../config");
 const connection = new web3_js_1.Connection("https://solana-devnet.g.alchemy.com/v2/ng1PoFOLtUyom4GCpXE1FUgYAp2l0NsA");
-const PARENT_WALLET_ADDRESS = "6DKwMKNkFJ3XZ2S15b4BP5wk2bu4D4dMhuTi5Ke11XrG";
+const PARENT_WALLET_ADDRESS = process.env.PARENT_WALLET_ADDRESS;
 const DEFAULT_TITLE = "Select the most clickable thumbnail";
 const s3Client = new client_s3_1.S3Client({
     credentials: {
-        accessKeyId: "AKIAZOXTIWLZKYIQRIEH",
-        secretAccessKey: "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",
+        accessKeyId: process.env.AccessKeyId,
+        secretAccessKey: process.env.SecretAccessKey,
     },
-    region: "eu-north-1",
+    region: process.env.Region,
 });
-// const s3Client = new S3Client({
-//     credentials: {
-//         accessKeyId: process.env.ACCESS_KEY_ID ?? "",
-//         secretAccessKey: process.env.ACCESS_SECRET ?? "",
-//     },
-//     region: "us-east-1"
-// })
 const router = (0, express_1.Router)();
 const prismaClient = new client_1.PrismaClient();
 prismaClient.$transaction((prisma) => __awaiter(void 0, void 0, void 0, function* () {
@@ -67,7 +60,7 @@ router.get("/task", middleware_1.authMiddleware, (req, res) => __awaiter(void 0,
             message: "You dont have access to this task"
         });
     }
-    // Todo: Can u make this faster?
+    // Todo 
     const responses = yield prismaClient.submission.findMany({
         where: {
             task_id: Number(taskId)
